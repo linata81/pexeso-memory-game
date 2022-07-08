@@ -42,32 +42,33 @@ function App() {
     setTimerOn(true);
   }
   
-  function flipCard(index,e) {
-    
+  function flipCard(index) { 
     if(start && !won) {    
-      if(activeCards.length === 0) {
-        setActiveCards([index]);
-      }
-      if(activeCards.length === 1) {
-        const firstIndex = activeCards[0];
-        const secondIndex = index;
-        
-        if(cards[firstIndex] === cards[secondIndex]) {
-
-          if(foundPairs.length + 2 === cards.length) {
-            setWon(true);
+      
+      if(activeCards[0] !== index && activeCards[1] !== index && foundPairs.indexOf(index) === -1) {
+        if(activeCards.length === 0) {
+          setActiveCards([index]);
+        }
+        if(activeCards.length === 1) {
+          const firstIndex = activeCards[0];
+          const secondIndex = index;
+          
+          if(cards[firstIndex] === cards[secondIndex]) {
+  
+            if(foundPairs.length + 2 === cards.length) {
+              setWon(true);
+            }
+            
+            setFoundPairs([...foundPairs, firstIndex, secondIndex])
           }
           
-          setFoundPairs([...foundPairs, firstIndex, secondIndex])
+          setActiveCards([...activeCards, index]);
         }
-        
-        setActiveCards([...activeCards, index]);
+        if(activeCards.length === 2) {
+          setActiveCards([index]);
+        }
+        setClicks(clicks + 1);
       }
-      if(activeCards.length === 2) {
-        setActiveCards([index]);
-      }
-      
-      setClicks(clicks + 1);
     }
   }
   
@@ -79,6 +80,7 @@ function App() {
     setStart(false);
     setWon(false);
     setTime({ minute: 0, second: 0 });
+    setTimerOn(false);
   }
   
   return (
@@ -102,7 +104,7 @@ function App() {
         clicks: {clicks} &nbsp;&nbsp; Found pairs: {foundPairs.length / 2}
       </div>
       
-      {won && (<div>You won the game! Congratulations!<br/></div>)}
+      {won && (<div className='won'>You won the game! Congratulations!</div>)}
       
       <button className={"btn" + (!start ? " visible" : '')} onClick={runStart}>Start</button>
       
