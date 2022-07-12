@@ -45,6 +45,7 @@ body {
 }
 .card .back{
   background-image: url('./img/bg-pexeso.png');
+  background-position: center;
   transform:rotateY(180deg);
 }
 .card-outer.flipped .card{
@@ -120,4 +121,36 @@ body {
 	background-clip: text;
 	background-image: linear-gradient(to bottom, red, yellow);
   padding-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .board {
+    width: 96%;
+    max-width: 96%;
+  }
+  .card-outer {
+    height: 103px;
+    max-height: 103px;
+  }
+  .stats {
+    width: auto;
+    font-size: 1.5rem;
+  }
+  .timer {
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+  }
+  .icon {
+    width: 40px;
+  }
+  .won {
+    width: auto;
+    font-size: 1.5rem;
+  }
 }
